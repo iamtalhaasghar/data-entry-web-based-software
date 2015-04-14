@@ -1,0 +1,53 @@
+<html>
+<head>
+
+<!-- Common headers -->
+<meta charset="utf-8" />
+<title> Minimal demo of Flask and SQLAlchemy </title>
+
+</head>
+
+<body>
+
+
+<h1> Minimal demo of Flask and SQLAlchemy </h1>
+
+
+<!-- <h2> Add new person. </h2>
+<div>
+    First name: <input type="text" ng-model="newPerson.firstname"/>
+    Last name: <input type="text" ng-model="newPerson.lastname"/>
+    <button type="submit" ng-click="add()">add</button>
+</div>
+ -->
+
+
+<h2> List of persons in people. </h2>
+
+<ul>
+
+{% for person in people %}
+    <li>{{ person.firstname}} {{ person.lastname }}</li>
+{% endfor %}
+
+</ul>
+
+{#
+<!-- <div>
+    name is: {{person.firstname}} {{person.lastname}}, 
+    id is: {{person._id}}<br/>
+    <input type="text" ng-model="person.firstname"/>  
+    <input type="text" ng-model="person.lastname"/>   
+    <button type="submit" ng-click="person.put()">update</button>
+    <button type="submit" ng-click="delete(person._id)">delete</button>
+    <br/><br/>
+</div>
+ -->
+#}
+
+
+
+
+
+</body>
+</html>
