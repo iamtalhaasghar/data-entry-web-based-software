@@ -7,7 +7,7 @@ import sqlalchemy.ext.declarative as dcl
 
 
 # CAMBIANDO echo se cambia los logs que hace sqlalchemy
-engine = sqa.create_engine('sqlite:///database.db', echo=True)
+engine = sqa.create_engine('sqlite:///database.db', echo=False)
 
 #
 db_session = orm.scoped_session(orm.sessionmaker(autocommit=False,

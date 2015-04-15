@@ -15,7 +15,8 @@ def add_curl(app):
     @app.before_request
     def before():
         print('\n\n')
-        print '< %s %s' % (flask.request.method, flask.request.url)
+        print '< {} {} {}'.format(flask.request.method,
+                                  flask.request.url, flask.request.full_path)
         for k, v in flask.request.headers:
             print wrap_header(k, v, '<')
 
@@ -23,10 +24,11 @@ def add_curl(app):
         # print('')
 
         if flask.request.mimetype == 'application/json':
+            print '< request data is json:'
             print wrap_json(flask.request.data, '<')
         elif flask.request.mimetype == 'application/x-www-form-urlencoded':
-            print "Hola"
-            print flask.request.data
+            print '< request data is x-www-form-urlencoded:'
+            print flask.request.form
 
         print('')
 
@@ -37,6 +39,7 @@ def add_curl(app):
             print wrap_header(k, v, '>')
 
         if response.mimetype == 'application/json':
+            print '> response data is json:'
             print wrap_json(response.data, '>')
 
         return response

@@ -1,28 +1,36 @@
-<html>
+<!DOCTYPE html>
+<html xml:lang="en" lang="en">
+
 <head>
-
 <!-- Common headers -->
-<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title> Minimal demo of Flask and SQLAlchemy </title>
-
 </head>
 
-<body>
 
+<body>
 
 <h1> Minimal demo of Flask and SQLAlchemy </h1>
 
 
-<!-- <h2> Add new person. </h2>
-<div>
-    First name: <input type="text" ng-model="newPerson.firstname"/>
-    Last name: <input type="text" ng-model="newPerson.lastname"/>
-    <button type="submit" ng-click="add()">add</button>
+<h2> Add new person. </h2>
+
+<form action="/new_person" method="POST">
+
+    First name: <input type="text" name="firstname"/>
+    Last name:  <input type="text" name="lastname"/>
+
+    <button type="submit">Add</button>
+
+</form>
+
+
+
 </div>
- -->
 
 
-<h2> List of persons in people. </h2>
+
+<h2> List of persons in db. </h2>
 
 <ul>
 

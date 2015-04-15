@@ -2,12 +2,13 @@
 # -*- coding: utf-8 -*-
 
 import flask
-from database import db_session
-from database import init_db
-from models import Person
 import logging
 
-init_db()
+import database
+from models import Person
+import curl
+
+database.init_db()
 
 app = flask.Flask(__name__)
 
@@ -16,22 +17,26 @@ app.logger.setLevel(logging.DEBUG)
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):
-    db_session.remove()
+    database.db_session.remove()
 
 
 @app.route('/')
-def hello_world():
+def index():
     q = Person.query.all()
-    t = ''
-    lista = []
-    for person in q:
-        t += ' ' + person.lastname
-        lista.append(person)
-    print "Hola", lista
-    print flask.render_template('index.html', people=lista)
-
     return flask.render_template('index.html', people=q)
 
+
+@app.route('/new_person', methods=['POST'])
+def add_person():
+    # show the post with the given id, the id is an integer
+    np = Person(firstname=flask.request.form['firstname'],
+                lastname=flask.request.form['lastname'])
+    database.db_session.add(np)
+    database.db_session.commit()
+    return index()
+
+# This adds curl-like logging
+curl.add_curl(app)
 
 if __name__ == '__main__':
     app.run(debug=True)
