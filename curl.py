@@ -15,8 +15,8 @@ def add_curl(app):
     @app.before_request
     def before():
         print('\n\n')
-        print '< {} {} {}'.format(flask.request.method,
-                                  flask.request.url, flask.request.full_path)
+        print u'< {} {} {}'.format(flask.request.method,
+                                   flask.request.url, flask.request.full_path)
         for k, v in flask.request.headers:
             print wrap_header(k, v, '<')
 

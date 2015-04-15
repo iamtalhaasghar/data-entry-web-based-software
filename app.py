@@ -9,6 +9,7 @@ from models import Person
 import curl
 
 database.init_db()
+session = database.db_session
 
 app = flask.Flask(__name__)
 
@@ -17,7 +18,7 @@ app.logger.setLevel(logging.DEBUG)
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):
-    database.db_session.remove()
+    session.remove()
 
 
 @app.route('/')
@@ -28,11 +29,20 @@ def index():
 
 @app.route('/new_person', methods=['POST'])
 def add_person():
-    # show the post with the given id, the id is an integer
     np = Person(firstname=flask.request.form['firstname'],
                 lastname=flask.request.form['lastname'])
-    database.db_session.add(np)
-    database.db_session.commit()
+    session.add(np)
+    session.commit()
+    return index()
+
+
+@app.route('/delete_person/<lastname>')
+def delete_person(lastname):
+    p = session.query(Person).filter_by(
+        lastname=lastname).one()
+    session.delete(p)
+    session.commit()
+    print lastname
     return index()
 
 # This adds curl-like logging
