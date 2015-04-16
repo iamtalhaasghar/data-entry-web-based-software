@@ -12,8 +12,8 @@ class Person(database.Base):
     __tablename__ = 'People'
     # __table_args__ = (sqa.Index("index-users", 'name',
     #                             'fullname', unique=True), )
-    people_id = sqa.Column(sqa.Integer,
-                           sqa.Sequence('people_id_seq'),
+    person_id = sqa.Column(sqa.Integer,
+                           sqa.Sequence('person_id_seq'),
                            primary_key=True)
 
     firstname = sqa.Column(sqa.String(50, convert_unicode=True),

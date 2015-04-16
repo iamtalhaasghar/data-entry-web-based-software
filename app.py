@@ -36,14 +36,26 @@ def add_person():
     return index()
 
 
-@app.route('/delete_person/<lastname>')
-def delete_person(lastname):
+@app.route('/delete_person', methods=['POST'])
+def delete_person():
     p = session.query(Person).filter_by(
-        lastname=lastname).one()
+        person_id=flask.request.form['person_id']
+    ).one()
     session.delete(p)
     session.commit()
-    print lastname
     return index()
+
+
+@app.route('/edit_person', methods=['POST'])
+def edit_person():
+    p = session.query(Person).filter_by(
+        person_id=flask.request.form['person_id']
+    ).one()
+    p.lastname = flask.request.form['lastname']
+    p.firstname = flask.request.form['firstname']
+    session.commit()
+    return index()
+
 
 # This adds curl-like logging
 curl.add_curl(app)

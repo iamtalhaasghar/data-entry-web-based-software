@@ -35,10 +35,17 @@
 <ul>
 
 {% for person in people %}
-    <li>{{ person.firstname }} {{ person.lastname }}  
-        <form action="/delete_person/{{ person.lastname }}" method="GET" 
+    <li> 
+        <form action="/edit_person" method="POST" 
          style='display: inline-block'>
-        <button type="submit">delete</button>
+         <input type="text" name="firstname" value="{{ person.firstname }}"/>
+         <input type="text" name="lastname" value="{{ person.lastname }}"/>  
+         <button type="submit" name="person_id" value="{{ person.person_id }}">Edit</button>
+        </form>
+
+        <form action="/delete_person" method="POST" 
+         style='display: inline-block'>
+        <button type="submit" name="person_id" value="{{ person.person_id }}">delete</button>
         </form>
     </li>
 {% endfor %}
