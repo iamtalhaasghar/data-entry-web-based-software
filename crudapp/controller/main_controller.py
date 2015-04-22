@@ -1,12 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import flask
-
-import crudapp.model.db_model as dbmodel
-
-import curl_controller
-
 """ The controller receives commands from the views,
     sends commands to the model,
     chooses the views to send,
@@ -18,11 +12,12 @@ import curl_controller
 
 """
 
+import flask
+
+import crudapp.model.db_model as dbmodel
+
 
 def def_control(app):
-
-    # This adds curl-like logging
-    curl_controller.add_curl(app)
 
     # This is part of the db_model init
     @app.teardown_appcontext

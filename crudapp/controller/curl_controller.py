@@ -6,7 +6,7 @@ import flask
 import crudapp.model.curl_model as curl_model
 
 
-def add_curl(app):
+def def_control(app):
 
     @app.before_request
     def before():
