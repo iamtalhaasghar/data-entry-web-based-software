@@ -1,5 +1,10 @@
 # flask-crud-minimal-demo
-Minimal demo of a web CRUD system with flask, sqlalchemy and sqlite.
+Minimal demo of a CRUD system 
+using SQLite to store data, 
+SQLAlchemy to access SQLite, 
+Flask as controller and server of the views, 
+Flask-Jinja2 to create html views 
+and Bootstrap to format the views.
 
 If you want to run this demo
 -----------------------------
