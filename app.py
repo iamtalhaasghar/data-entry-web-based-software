@@ -35,7 +35,7 @@ def add_person():
                 lastname=flask.request.form['lastname'])
     session.add(np)
     session.commit()
-    return index()
+    return flask.redirect(flask.url_for('index'))
 
 
 @app.route('/delete_person', methods=['POST'])
