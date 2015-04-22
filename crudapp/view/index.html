@@ -5,75 +5,107 @@
 <!-- Common headers -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title> Minimal demo of Flask and SQLAlchemy </title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+
 </head>
 
 
-<body>
-
-<h1> Minimal demo of Flask and SQLAlchemy </h1>
+<body >
 
 
-<h2> Add new person. </h2>
 
-<form action="/new_person" method="POST">
+<div class="container">
+  <div class="jumbotron">
+    <h1> Minimal demo of CRUD app </h1>
+    <p>  Using SQLite to store data, 
+         SQLAlchemy to acces SQLite, 
+         Flask as controller, 
+         Jinja2 to create html views, 
+         and Bootstrap to format views </p>
 
-    First name: <input type="text" name="firstname"/>
-    Last name:  <input type="text" name="lastname"/>
+  </div>
+</div>
 
-    <button type="submit">Add</button>
+<div class="container" >
+<div class="col-sm-4" style="background-color:lavender;">
 
+<h2> Add new person </h2>
+<form action="/new_person" method="POST" role="form">
+    <div class="form-group">
+        <label for="firstname"> First Name: </label>
+        <input type="text" name="firstname" class="form-control"
+                placeholder="Enter first name"/>
+        <label for="lastname">Last Name:  </label>
+        <input type="text" name="lastname" class="form-control"
+                placeholder="Enter last name"/>
+    </div>
+    <button class="btn btn-primary btn-block" type="submit">Add</button>
+<p></p>
 </form>
-
-
-
 </div>
 
 
+<div class="col-sm-4" >
 
-<h2> List of persons in db. </h2>
+<h2> List of people in database </h2>
 
-<ul>
-
+<table class="table table-condensed">
+<thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+      </tr>
+    </thead>
+<tbody>
 {% for person in people %}
-    <li> 
-        <form action="/edit_person" method="POST" 
-              style='display: inline-block'>
-
-            <input type="text" name="firstname" 
+    <tr>
+        <form action="/edit_person" method="POST" >
+            <td>
+                <input type="text" name="firstname" 
                    value="{{ person.firstname }}"/>
-
-            <input type="text" name="lastname" 
+            </td>
+            <td>
+                <input type="text" name="lastname" 
                    value="{{ person.lastname }}"/>  
-
-            <button type="submit" name="person_id" 
-                    value="{{ person.person_id }}">Edit</button>
+            </td>
+            <td>
+                <button type="submit" name="person_id"
+                    class="btn btn-default" 
+                    value="{{ person.person_id }}">
+                    Edit
+                </button>
+            </td>
         </form>
+        <form action="/delete_person" method="POST">
+            <td>
 
-        <form action="/delete_person" method="POST" 
-              style='display: inline-block'>
-
-            <button type="submit" name="person_id" 
-                    value="{{ person.person_id }}">delete</button>
+                <button type="submit" name="person_id" 
+                        class="btn btn-default"
+                    value="{{ person.person_id }}">
+                    Delete
+                </button>
+            </td>
         </form>
-    </li>
+    </tr>
 {% endfor %}
 
-</ul>
 
-{#
-<!-- <div>
-    name is: {{person.firstname}} {{person.lastname}}, 
-    id is: {{person._id}}<br/>
-    <input type="text" ng-model="person.firstname"/>  
-    <input type="text" ng-model="person.lastname"/>   
-    <button type="submit" ng-click="person.put()">update</button>
-    <button type="submit" ng-click="delete(person._id)">delete</button>
-    <br/><br/>
+</tbody>
+</table>
 </div>
- -->
-#}
 
-
+</div>
 
 
 
