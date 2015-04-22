@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import sqlalchemy as sqa
-import sqlalchemy.orm as orm
-import sqlalchemy.ext.declarative as dcl
 
 import database
 
