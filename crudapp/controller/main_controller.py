@@ -14,36 +14,45 @@
 
 import flask
 
-import crudapp.model.db_model as dbmodel
+import crudapp.model.data_store as dstore
+# dstore: Data store
 
 
 def def_control(app):
 
-    # This is part of the db_model init
-    @app.teardown_appcontext
-    def shutdown_session(exception=None):
-        dbmodel.session.remove()
+    # This is part of the data storage initialization
+    dstore.teardown(app)
 
     @app.route('/')
     def index():
-        q = dbmodel.all_people()
+        q = dstore.query_all_people()
+        print flask.url_for('static', filename='index.html')
+        # Returns main page
         return flask.render_template('index.html', people=q)
 
+    # The data that comes from a method POST is stored by flask in
+    # request.form
     @app.route('/add_person', methods=['POST'])
     def add_person():
-        dbmodel.add_person(firstname=flask.request.form['firstname'],
-                           lastname=flask.request.form['lastname'])
+        dstore.add_person(flask.request.form['firstname'],
+                          flask.request.form['lastname'])
+        # Returns a 300 redirection command with the the url corresponding
+        # to function index(). Then the browser will ask for that url.
         return flask.redirect(flask.url_for('index'))
 
     @app.route('/delete_person', methods=['POST'])
     def delete_person():
-        dbmodel.delete_person(person_id=flask.request.form['person_id'])
+        dstore.delete_person(flask.request.form['person_id'])
 
         return flask.redirect(flask.url_for('index'))
 
     @app.route('/edit_person', methods=['POST'])
     def edit_person():
-        dbmodel.edit_person(person_id=flask.request.form['person_id'],
-                            firstname=flask.request.form['firstname'],
-                            lastname=flask.request.form['lastname'])
+        dstore.edit_person(flask.request.form['person_id'],
+                           flask.request.form['firstname'],
+                           flask.request.form['lastname'])
         return flask.redirect(flask.url_for('index'))
+
+    @app.errorhandler(404)
+    def page_not_found(error):
+        return flask.render_template('page_not_found.html'), 404

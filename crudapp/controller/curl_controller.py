@@ -3,16 +3,16 @@
 
 import flask
 
-import crudapp.model.curl_model as curl_model
+import crudapp.model.curl_print as curl_print
 
 
 def def_control(app):
 
     @app.before_request
     def before():
-        curl_model.print_incoming_request(flask.request)
+        curl_print.print_incoming_request(flask.request)
 
     @app.after_request
     def after(response):
-        curl_model.print_outgoing_response(response)
+        curl_print.print_outgoing_response(response)
         return response

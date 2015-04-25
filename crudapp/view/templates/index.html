@@ -41,7 +41,7 @@
 <div class="container" >
 <div class="col-sm-4" style="background-color:lavender;">
 
-<h2> Add new person to the database </h2>
+<h2> Add new person </h2>
 <form action="/add_person" method="POST" role="form">
     <div class="form-group">
         <label for="firstname"> First Name: </label>
@@ -59,7 +59,7 @@
 
 <div class="col-sm-4" >
 
-<h2> List of people in database </h2>
+<h2> People list </h2>
 
 <table class="table table-condensed">
 <thead>
@@ -106,8 +106,12 @@
 </table>
 </div>
 
+
 </div>
 
+<div class="container" >
+    <a href="{{ url_for('static', filename='MVCDrawing.svg') }}"> MVC Diagram </a>
+</div>
 
 
 </body>

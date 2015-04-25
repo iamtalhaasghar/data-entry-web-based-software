@@ -19,7 +19,13 @@ database.init_db()
 session = database.db_session
 
 
-def all_people():
+def teardown(app):
+    @app.teardown_appcontext
+    def shutdown_session(exception=None):
+        session.remove()
+
+
+def query_all_people():
     q = Person.query.all()
     return q
 
