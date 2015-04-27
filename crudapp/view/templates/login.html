@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xml:lang="en" lang="en">
+
+<head>
+<!-- Common headers -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title> Minimal demo of Flask and SQLAlchemy </title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- Validador parsley -->
+<script src="{{ url_for('static', filename='parsley.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='i18n/es.js') }}"></script>
+
+<!-- Latest compiled Bootstrap -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='parsley.css') }}">
+
+</head>
+
+
+<body >
+
+
+
+<div class="container">
+<h1>Login</h1>
+</div>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+<div class="container">
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+</div>
+  {% endif %}
+{% endwith %}
+
+<div class="container">
+
+
+{% if error %}
+  <p class=error><strong>Error:</strong> {{ error }}
+{% endif %}
+
+<form action="" method=post>
+  <dl>
+    <dt>Username:
+    <dd><input type=text name=username 
+         value="{{request.form.username }}"
+         autofocus
+         >
+    <dt>Password:
+    <dd><input type=password name=password>
+  </dl>
+  <p><input type=submit value=Login>
+</form>
+
+</div>
+
+
+</body>
+</html>

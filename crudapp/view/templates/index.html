@@ -40,9 +40,29 @@
         Flask-Jinja2 to create html views 
         and Bootstrap to format the views.
      </p>
-
+    
+    {% if not session['username'] %}
+      <p>Do you want to <a href="{{ url_for('login') }}">log in?</a> </p>
+    {% else %}
+      <p> {{session['username']}}, do you want to <a href="{{ url_for('logout') }}">log out?</a> </p>
+   {% endif %}
+ 
   </div>
 </div>
+
+
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+<div class="container">
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+</div>
+  {% endif %}
+{% endwith %}
 
 
 <div class="container" style="background-color:lavender;">
