@@ -20,6 +20,13 @@ class Person(database.Base):
     lastname = sqa.Column(sqa.String(50, convert_unicode=True),
                           nullable=False, index=True, unique=True)
 
+    @sqa.orm.validates('firstname', 'lastname')
+    def validate_name(self, key, name):
+        condition = name[0].isupper()
+        msg = "{} doesn't start with uppercase letter".format(key)
+        assert condition, msg
+        return name
+
     def __repr__(self):
         return self.__unicode__().encode('utf-8')
 

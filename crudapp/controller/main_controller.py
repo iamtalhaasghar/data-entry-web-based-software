@@ -62,6 +62,11 @@ def def_control(app):
     #     return 'Database connection failed', 500
 
     @app.errorhandler(sqla_IntegrityError)
-    def special_exception_handler(error):
+    def special_exception_handler(error_msg):
         msg = 'Error: Last names must be unique'
         return flask.render_template('server_error.html', msg=msg), 500
+
+    @app.errorhandler(AssertionError)
+    def special_exception_handler(error_msg):
+        return flask.render_template('server_error.html', msg=error_msg), 500
+
