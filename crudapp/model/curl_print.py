@@ -21,9 +21,13 @@ def print_incoming_request(request):
     if request.mimetype == 'application/json':
         print '< request data is json:'
         print wrap_json(request.data, '<')
+
     elif request.mimetype == 'application/x-www-form-urlencoded':
         print '< request data is x-www-form-urlencoded:'
         print request.form
+
+    else:
+        pass
 
     print('')
 

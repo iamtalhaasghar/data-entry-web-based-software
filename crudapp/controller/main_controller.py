@@ -16,7 +16,7 @@ import flask
 
 import crudapp.model.data_store as dstore
 # dstore: Data store
-
+from sqlalchemy.exc import IntegrityError as sqla_IntegrityError
 
 def def_control(app):
 
@@ -56,3 +56,12 @@ def def_control(app):
     @app.errorhandler(404)
     def page_not_found(error):
         return flask.render_template('page_not_found.html'), 404
+
+    # @app.errorhandler(flask.DatabaseError)
+    # def special_exception_handler(error):
+    #     return 'Database connection failed', 500
+
+    @app.errorhandler(sqla_IntegrityError)
+    def special_exception_handler(error):
+        msg = 'Error: Last names must be unique'
+        return flask.render_template('server_error.html', msg=msg), 500
