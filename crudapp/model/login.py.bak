@@ -14,7 +14,7 @@
 
 
 def raise_error_if_not_logged_in(session):
-    if 'username' not in list(session.keys()):
+    if 'username' not in session.keys():
         raise RuntimeError()
 
 

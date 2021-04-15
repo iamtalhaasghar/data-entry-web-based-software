@@ -29,7 +29,7 @@ def def_control(app):
     @app.route('/')
     def index():
         q = dstore.query_all_people()
-        print(flask.url_for('static', filename='index.html'))
+        print flask.url_for('static', filename='index.html')
         # Returns main page
         return flask.render_template('index.html', people=q)
 

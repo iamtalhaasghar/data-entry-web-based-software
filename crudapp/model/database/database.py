@@ -35,7 +35,7 @@ Base.query = db_session.query_property()
 
 
 def init_db():
-    import data_models
+    from crudapp.model.database import data_models
     Base.metadata.create_all(engine)
 
 
