@@ -17,9 +17,11 @@ def raise_error_if_not_logged_in(session):
     if 'username' not in list(session.keys()):
         raise RuntimeError()
 
+def isUserLoggedIn(session):
+    return 'username' in session.keys()
 
 def check_login(username, password):
-    if username == 'admin' and password == 'secret':
+    if username == 'admin@email.com' and password == 'secret':
         return True
     else:
         return False
