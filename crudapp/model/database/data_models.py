@@ -3,7 +3,7 @@
 
 import sqlalchemy as sqa
 
-import database
+from crudapp.model.database import database
 
 
 class Person(database.Base):
