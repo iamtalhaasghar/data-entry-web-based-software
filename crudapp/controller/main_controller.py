@@ -28,10 +28,17 @@ def def_control(app):
 
     @app.route('/')
     def index():
+        #OLD CODE
+        '''
+        print("Flask session:",flask.session['username'])
         q = dstore.query_all_people()
         print(flask.url_for('static', filename='index.html'))
         # Returns main page
         return flask.render_template('index.html', people=q)
+        '''
+        return flask.redirect(flask.url_for('login'))
+
+            
 
     # The data that comes from a method POST is stored by flask in
     # request.form
@@ -62,16 +69,18 @@ def def_control(app):
 
     @app.route('/login', methods=['GET', 'POST'])
     def login():
-
         if flask.request.method == 'GET':
-            return flask.render_template('login.html')
+            if(log_in.isUserLoggedIn(flask.session)):
+                return flask.redirect(flask.url_for('dashboard'))
+            else:
+                return flask.render_template('login.html')
 
         elif flask.request.method == 'POST':
             login_ok = log_in.check_login(flask.request.form['username'],
                                           flask.request.form['password'])
             if login_ok:
                 flask.session['username'] = flask.request.form['username']
-                flask.flash('You were successfully logged in')
+                print('You were successfully logged in')
                 return flask.redirect(flask.url_for('index'))
             else:
                 flask.flash('Invalid credentials')
@@ -81,14 +90,42 @@ def def_control(app):
     def logout():
         # remove the username from the session if it's there
         flask.session.pop('username', None)
+        print('You were successfully logged out')
         return flask.redirect(flask.url_for('index'))
+
+    @app.route('/forgot')
+    def forgotPassword():
+        return flask.render_template('forgot.html')
+
+    @app.route('/register')
+    def registerUser():
+        return flask.render_template('register.html')
+
+    @app.route('/reset')
+    def resetPassword():
+        return flask.render_template('reset.html')
+
+    @app.route('/error')
+    def serverError():
+        return flask.render_template('server_error.html')
+    
+    @app.route('/dashboard')
+    def dashboard():
+        if(log_in.isUserLoggedIn(flask.session)):
+            return flask.render_template('dashboard.html')
+        else:
+            return flask.redirect(flask.url_for('login'))
+            
+    
+
+
 
     # set the secret key.  keep this really secret:
     app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
     @app.errorhandler(404)
     def page_not_found(error):
-        return flask.render_template('page_not_found.html'), 404
+        return flask.render_template('404.html'), 404
 
     # @app.errorhandler(flask.DatabaseError)
     # def special_exception_handler(error):

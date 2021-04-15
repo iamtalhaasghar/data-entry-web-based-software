@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+.server-response{
+    margin-top:30px;
+    padding-left: 20px;
+    border-color: red; 
+    border-style: solid;
+}
