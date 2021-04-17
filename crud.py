@@ -8,7 +8,7 @@ import crudapp.controller.main_controller as main_controller
 import crudapp.controller.curl_controller as curl_controller
 
 # set folder for static data
-PWD = os.environ.get("PWD")
+PWD = os.getcwd()
 
 template_folder = os.path.join(PWD, "crudapp/view/templates")
 static_folder = os.path.join(PWD, "crudapp/view/static")
@@ -22,4 +22,5 @@ main_controller.def_control(app)
 # This adds curl-like logging
 curl_controller.def_control(app)
 
-app.run(debug=True)
+if __name__=="__main__":
+	app.run(host='0.0.0.0',port=5000)
