@@ -21,7 +21,7 @@ def isUserLoggedIn(session):
     return 'username' in session.keys()
 
 def check_login(username, password):
-    if username == 'admin@email.com' and password == 'secret':
+    if username == 'admin' and password == 'admin':
         return True
     else:
         return False
