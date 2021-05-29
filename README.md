@@ -21,8 +21,8 @@ You can deploy this flask application on a linux server using Gunicorn. Follow [
 
 
 # Credits
-[Flask Crud by Juan José Denis Corrales](https://github.com/jjdenis/flask-crud-minimal-demo)
-[Login Page by nauvalazhar](https://github.com/nauvalazhar/bootstrap-5-login-page/)
-[404 Page by Indra Kusuma](https://github.com/idindrakusuma/simple-404-template)
-[Sidebar by Start Bootstrap LLC](https://github.com/StartBootstrap/startbootstrap-simple-sidebar)
-[Registration Form Elbert Nilton Batista Ribeiro](https://github.com/ElbertRibeiro/Registration-Form)
+- [Flask Crud by Juan José Denis Corrales](https://github.com/jjdenis/flask-crud-minimal-demo)
+- [Login Page by nauvalazhar](https://github.com/nauvalazhar/bootstrap-5-login-page/)
+- [404 Page by Indra Kusuma](https://github.com/idindrakusuma/simple-404-template)
+- [Sidebar by Start Bootstrap LLC](https://github.com/StartBootstrap/startbootstrap-simple-sidebar)
+- [Registration Form Elbert Nilton Batista Ribeiro](https://github.com/ElbertRibeiro/Registration-Form)
